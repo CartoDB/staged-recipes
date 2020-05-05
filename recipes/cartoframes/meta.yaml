@@ -13,22 +13,28 @@ build:
   noarch: python
   number: 0
   skip: True  # [py<35]
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
   host:
-    - python
+    - python >=3.5
     - pip
   run:
-    - python
+    - python >=3.5
+    - appdirs >=1.4.3,<2.0
+    - jinja2 >=2.10.1,<3.0
+    - geopandas >=0.6.0,<1.0
+    - tqdm >=4.32.1,<5.0
+    - unidecode >=1.1.0,<2.0
+    - google-cloud-storage ==1.23.0
+    - google-cloud-bigquery ==1.22.0
+    - google-cloud-bigquery-storage ==0.7.0
+    - fastavro ==0.22.7
+    - semantic_version >=2.8.0,<3
 
 test:
   imports:
     - cartoframes
-  requires:
-    - pytest tests/unit
-  source_files:
-    - tests/unit
 
 about:
   home: http://github.com/CartoDB/cartoframes

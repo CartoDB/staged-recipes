@@ -1,0 +1,52 @@
+{% set name = "cartoframes" %}
+{% set version = "1.0.0" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 3af27bdeb330cc6ddd373eec0ccd6f55d3b9d1162ebc63872685d2ccefeb1980
+
+build:
+  noarch: python
+  number: 0
+  skip: True  # [py<35]
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+
+test:
+  imports:
+    - cartoframes
+  requires:
+    - pytest tests/unit
+  source_files:
+    - tests/unit
+
+about:
+  home: http://github.com/CartoDB/cartoframes
+  license: BSD
+  license_file: LICENSE
+  summary: 'CARTO Python package for data scientists'
+  description: |
+    A Python package for integrating CARTO <https://carto.com> maps, analysis,
+    and data services into data science workflows. 
+    Python data analysis workflows often rely on the de facto standards pandas
+    and Jupyter notebooks. Integrating CARTO into this workflow saves data scientists
+    time and energy by not having to export datasets as files or retain multiple copies
+    of the data. Instead, CARTOframes give the ability to communicate reproducible
+    analysis while providing the ability to gain from CARTO's services like hosted,
+    dynamic or static maps and Data Observatory augmentation.
+  doc_url: https://carto.com/developers/cartoframes
+  dev_url: https://github.com/CartoDB/cartoframes
+
+extra:
+  recipe-maintainers:
+    - Jesus89
